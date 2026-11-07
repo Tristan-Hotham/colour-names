@@ -1,0 +1,7 @@
+src,sampled,correct,accepted,precision
+en_compound,50,49,2254,0.98
+hindi_urdu,50,50,238,1.0
+korean,50,50,184,1.0
+mongolian,50,50,793,1.0
+nordic_kvit,50,50,1374,1.0
+turkic_compound,50,50,9395,1.0
