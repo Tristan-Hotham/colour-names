@@ -1,0 +1,158 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\newfontfamily\headfont{Inter}[UprightFont=*-ExtraBold,BoldFont=*-ExtraBold,Extension=.otf,Path=/usr/share/fonts/opentype/inter/]
+\newfontfamily\cjk{Noto Serif CJK SC}
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{graphicx,booktabs,float,caption,array,xcolor,longtable}
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage[round]{natbib}
+\usepackage{setspace}
+\setstretch{1.05}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\titleformat{\section}{\headfont\Large}{\thesection}{0.8em}{}
+\titleformat{\subsection}{\headfont\large}{\thesubsection}{0.8em}{}
+\captionsetup{font=small,labelfont=bf}
+\urlstyle{same}
+\hypersetup{pdftitle={The Colours of the World's Place Names},pdfauthor={Tristan Hotham}}
+
+\begin{document}
+\begin{center}
+{\Large\bfseries The Colours of the World's Place Names\par}
+\vspace{0.4em}
+{\large Black, white, red, green, blue and yellow in {{source.main|int}} names from GeoNames,\\in {{source.languages|int}} languages\par}
+\vspace{1.2em}
+{\large Tristan Hotham\par}
+\vspace{0.3em}
+{\small Independent researcher\\
+ORCID: 0000-0003-4931-9349\\
+DOI: \href{https://doi.org/{{meta.doi}}}{https://doi.org/{{meta.doi}}}\par}
+\vspace{0.8em}
+2026
+\end{center}
+
+\begin{quote}
+\small
+\begin{center}\textbf{Abstract}\end{center}
+Places all over the world are named after their colour: Black Creek, Río Blanco, Cerro Colorado, Kara Su, Krasnaya Gorka, Baishui. I extract colour names from GeoNames, the largest open gazetteer, with a classifier written separately for each of {{source.languages|int}} languages or language groups, and check it on review samples of up to 50 names for each colour and language ({{precision.sampled|int}} names; {{precision.overall_pct|int}}\% judged correct after tuning) and of 50 names for each rule of a second, wider pass ({{precision_supp.correct|int}} of {{precision_supp.sampled|int}} correct). The main set holds {{source.main|int}} natural features and settlements in {{source.countries|int}} countries and territories. White is the commonest colour ({{colour_pct.white|f1}}\%), then black ({{colour_pct.black|f1}}\%) and red ({{colour_pct.red|f1}}\%); without the very numerous Chinese and Japanese names black edges ahead ({{colour_pct_nozhja.black|f1}}\% against {{colour_pct_nozhja.white|f1}}\%) and blue is rare everywhere ({{colour_pct.blue|f1}}\% overall). The colour depends on the kind of place: weighting languages equally, rivers are the blackest kind ({{words.river_black_eq|f1}}\% black, blacker than their language's average in {{rivers_blacker.blacker|int}} of {{rivers_blacker.langs|int}} languages) and springs the whitest ({{words.spring_white_eq|f1}}\%), while mountains are only weakly white. Each language has a favourite: svart in the Nordic languages, siāh in Persian, kara and ak in the Turkic languages, blanco and colorado in Spanish, bai and huang in Chinese. In the {{countries.with30|int}} countries with at least 30 names, the commonest colour is white in {{countries.top_count.white|int}}, black in {{countries.top_count.black|int}} and red in {{countries.top_count.red|int}}. Red is partly political: {{political.eslav_pct|f1}}\% of East Slavic and {{political.zh_pct|f1}}\% of Chinese red names are revolutionary. Names of earth, soil and clay are no redder than names in general.
+
+\textbf{Keywords:} toponymy; colour terms; place names; GeoNames; basic colour terms; historical geography; maps
+\end{quote}
+
+\section{Introduction}
+Colour is one of the oldest ways of naming a place. A peat-dark stream, a chalk spring, a hill of red soil or a green island is named for what it looks like, and these names are among the most transparent in any language. The words for colour are also among the most studied words in linguistics: since \citet{berlinkay} it has been argued that languages gain their basic colour terms in a broadly fixed order, black and white (or dark and light) first, then red, then green and yellow, then blue.
+
+This study asks how colours are used in the names of places across the world. Which colours are used most, and does that follow the order of colour terms? Do kinds of place have characteristic colours, black rivers or white mountains? Which colours does each language favour, and which country's names are blackest or whitest? And how much of the red in place names is the colour of the ground? It accompanies an interactive map of every name (\url{{{meta.page}}}).
+
+\section{Data}
+\textbf{GeoNames.} GeoNames \citep{geonames} is an open gazetteer of about 13 million features, each with a name, an ASCII form, alternate names in other languages and scripts, coordinates, a feature class and code (stream, mountain, populated place and so on) and a country code. It is released under CC BY 4.0. It is built from national gazetteers and its density varies greatly: the United States, Mexico, China, Norway and Iran are covered in great detail, much of Africa and South Asia thinly.
+
+\textbf{The candidates.} Two searches on colour words were run over the full allCountries dump and kept {{source.candidates|int}} rows. The first ({{source.candidates_first|int}} rows) took whole words in English and the Romance languages; the start of words in German, Dutch, the Nordic languages, Polish and Russian; whole words in the Turkic, Arabic and Persian romanisations; and the colour characters in the Chinese and Japanese alternate names. A second, wider pass ({{supplement.rows|int}} rows) added compounds and languages the first had missed: English compounds in Britain, Ireland and the former colonies (Blackburn, Whitby, Greenwich, Redcar), Turkic compounds (Aksu, Karakol, Kızılırmak, Göksu), Norwegian and Danish \textit{kvit} and \textit{hvid}, Mongolian (\textit{khar}, \textit{tsagaan}, \textit{ulaan}, \textit{nogoon}, \textit{khökh}, \textit{shar}), Hindi, Urdu and Nepali (\textit{kala}, \textit{safed}, \textit{lal}, \textit{hara}, \textit{nila}, \textit{pila}) and Korean. These are candidates, most of which are not colour names in the sense meant here.
+
+\textbf{Other sources.} Country outlines are from Natural Earth \citep{naturalearth}; the interactive map uses the Inked World map style \citep{inkmap} on OpenStreetMap data served by OpenFreeMap.
+
+\section{Methods}
+\subsection{A classifier for each language}
+A colour word in a place name is often something else: a surname (White's Creek, Colonia Rojas, Huangjiacun), a saint (Santa Blanca), a person (Red Nichols Lake), a state (Colorado Springs), a plant or animal (Red Oak, Blue Jay), a revolutionary slogan (Krasnyy Oktyabr'), or a different word that looks the same (Rotterdam, Belgorod's neighbour Belovo, Finnish \textit{vita-}). The classifier therefore has a rule set for each language (Table~\ref{tab:rules}). A name passes when one of its words is a colour word of a language spoken in the country where the place lies, in a form that language uses for the colour: the plain or inflected adjective, or the first part of a compound whose second part is a landscape word from a list (German \textit{Schwarz-wald}, Norwegian \textit{Svart-berget}, Afrikaans \textit{Wit-rivier}, Turkish \textit{Kızıl-ırmak}, Russian \textit{Krasno-yarsk}). Each language has a stop-list: names after a saint, a possessive (\textit{X's}), family-name endings (Polish \textit{-ów}, \textit{-owo}; Russian \textit{-ov}, \textit{-ovo}); in the United States, Canada and Australia, Spanish \textit{negro} and \textit{colorado} count only with a Spanish word beside them, since Negro Creek is named for people and Colorado City for the state. Chinese and Japanese names are read only in their own characters, from the alternate names, since romanised syllables such as \textit{bai} or \textit{hong} have many other meanings; Chinese names whose colour character is followed by a word for family or house (\textit{jia}, \textit{zhuang}) are treated as family names, and pasture names written in sound for Tibetan and Mongolian words are dropped. The rules of the second pass are stricter still (Table~\ref{tab:supp}). An English compound must end in a landscape element of English place names (\textit{-burn}, \textit{-pool}, \textit{-by}, \textit{-church}, \textit{-wich}, \textit{-water}); \textit{Red-} takes a short list (\textit{-hill}, \textit{-car}, \textit{-cliff}), since it is often Old English \textit{hr\=eod}, reed, or Cornish \textit{rhyd}, ford (Redruth, Redbourn, Redmire), and bare \textit{Whit-} counts only in Britain and Ireland (Whitby, Whitchurch), since Whitney and Whittington come from the personal name Hwita; in North America, Australia, New Zealand and South Africa common surnames (Blackburn, Greenwood, Whitley) and towns named after people (Greenville) are stopped. A Turkic stem must start the word and be followed by a landscape word (\textit{Ak-su}, \textit{Kara-kol}, \textit{Kızıl-ırmak}), with stops for \textit{karaca} (roe deer), \textit{akar} (flowing) and the like. Mongolian words count as whole words or hyphenated compounds, never Russian \textit{shar}, a strait. Hindi and Urdu words count only beside a landscape word (Kala Pani, Lal Tibba), which keeps out personal names (Lal Khan, Moti Lal) and the goddess Kali but also most red and white names. Korean names count only where GeoNames gives the colour hanja ({\cjk 紅} for hong, as hong is also the family name {\cjk 洪}) or where a hangul compound is unambiguous ({\cjk 흑}, black; {\cjk 백석}, white stone; {\cjk 청룡}, blue dragon; {\cjk 황토}, yellow earth). The single East Asian character {\cjk 青} (qing in Chinese, ao in Japanese), which covers blue and green, is kept as its own category, blue-green.
+
+Two flags are kept rather than dropped. English names in which the colour belongs to a plant or animal (Red Oak, White Pine, Blackbird) are flagged and left out of the main set ({{source.species|int}} names). Red names from the Soviet and Chinese revolutionary vocabulary (with \textit{Oktyabr'}, \textit{Zvezda}, \textit{Partizan}, {\cjk 红旗} Red Flag, {\cjk 红星} Red Star and the like) are flagged as political and kept, since they are red names, but reported apart.
+
+{{TABLE_SUPP}}
+
+\subsection{Kinds of place and the main set}
+GeoNames feature codes are grouped into nine kinds of place: rivers, streams and wadis; lakes, ponds and marshes; springs and wells; seas, bays and coasts; mountains and hills; rocks, cliffs and islands; valleys, gorges and passes; plains, deserts, woods and other land; and towns and villages. Buildings, farms, mines, hotels, parks, roads, administrative areas and undersea features ({{source.excluded_kind|int}} accepted names) are left out of the main set, because they often take a colour from an owner, a brand or another place.
+
+\subsection{Review}
+For every language and colour I read a sample of up to 50 accepted names, drawn in a fixed pseudo-random order (an MD5 hash of the GeoNames identifier), and judged whether the word is the colour there. The samples were used to tune the rules, and the final precision is measured on the samples drawn after tuning, so it is optimistic: names the tuning removed were found in these samples. In all I read {{first_pass.names_read|int}} different names.
+
+\subsection{Comparisons}
+Shares of each colour are given for all names pooled, and, where noted, with each language weighted equally (languages with at least 30 names of the kind of place in question), so that the {{families.zh_n|int}} Chinese names, most of them villages, do not dominate. Countries are compared on the most common colour among their names and on the ratio of black to white names, with half a name added to each count. Names of earth, soil, sand and clay are found by words in the name (\textit{tierra}, \textit{terra}, \textit{barro}, \textit{glina}, \textit{khāk}, \textit{kum} and others, and the characters {\cjk 土} and {\cjk 泥}).
+
+\section{Results}
+\subsection{The whole map}
+The main set holds {{source.main|int}} names in {{source.countries|int}} countries and territories (Figure~\ref{fig:world}): {{natural.n|int}} natural features and {{settlement.n|int}} settlements. The density of dots follows the density of the gazetteer: the United States, Mexico, China, Norway, Russia, Kazakhstan, Turkey and Iran stand out. The second pass contributes {{supplement.main|int}} names, {{supplement.main_by_tag.turkic_compound|int}} of them Turkic compounds and {{supplement.main_by_tag.en_compound|int}} English ones.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_world.jpg}
+\caption{Every colour name in the main set, a dot in its colour (Equal Earth projection).}\label{fig:world}\end{figure}
+
+\subsection{Which colours}
+White is the commonest colour ({{colour_pct.white|f1}}\%), then black ({{colour_pct.black|f1}}\%), red ({{colour_pct.red|f1}}\%), yellow ({{colour_pct.yellow|f1}}\%), green ({{colour_pct.green|f1}}\%), blue-green ({{colour_pct.grue|f1}}\%) and blue ({{colour_pct.blue|f1}}\%). Yellow's place owes everything to China: without Chinese and Japanese names the order is black {{colour_pct_nozhja.black|f1}}\%, white {{colour_pct_nozhja.white|f1}}\%, red {{colour_pct_nozhja.red|f1}}\%, green {{colour_pct_nozhja.green|f1}}\%, blue {{colour_pct_nozhja.blue|f1}}\% and yellow {{colour_pct_nozhja.yellow|f1}}\%. Black, white and red together make up more than half of the colour names of every language with at least 300 names, matching the first stages of \citet{berlinkay}; blue is never among the three commonest of the six colours in any such language (Figure~\ref{fig:mix}).
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_mix.png}
+\caption{Share of each colour among the colour names of each language with at least 300 names.}\label{fig:mix}\end{figure}
+
+\subsection{Which places}
+With languages weighted equally (Figure~\ref{fig:kinds}, Table~\ref{tab:kinds}), rivers and streams are the blackest kind of place ({{words.river_black_eq|f1}}\% black against {{words.river_white_eq|f1}}\% white), and rivers are blacker than their language's average in {{rivers_blacker.blacker|int}} of {{rivers_blacker.langs|int}} languages. Springs and wells are the whitest ({{words.spring_white_eq|f1}}\%). Red reaches its highest share on rocks, cliffs and islands. Mountains are white more often than black ({{words.mountain_white_eq|f1}}\% against {{words.mountain_black_eq|f1}}\%, with red at {{words.mountain_red_eq|f1}}\%), but they are whiter than their language's average in only {{mountains_whiter.whiter|int}} of {{mountains_whiter.langs|int}} languages; they are whiter than average in Chinese, Japanese, Mongolian, Dutch and Afrikaans, Russian, the Nordic languages and French, but not in Spanish, German, English, Persian or the Turkic languages. The ratio of black to white names is {{bw_by_ftype.river|f2}} for rivers, {{bw_by_ftype.lake|f2}} for lakes and {{bw_by_ftype.sea|f2}} for seas and coasts, but {{bw_by_ftype.spring|f2}} for springs and {{bw_by_ftype.settlement|f2}} for settlements.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_kinds.png}
+\caption{Colour of the name by kind of place, languages with at least 30 names of that kind weighted equally.}\label{fig:kinds}\end{figure}
+
+{{TABLE_KINDS}}
+
+\subsection{Languages and their favourite colours}
+Table~\ref{tab:langs} sets out the colour mix of each language. In the Nordic languages {{families.nord_svart_pct|f1}}\% of colour names are svart, black, mostly lakes, tarns and fells; in Persian and Dari {{families.fa_siah_pct|f1}}\% are siāh, and Kūh-e Sīāh, Black Mountain, occurs {{families.kuh_siah|int}} times. In the Turkic languages kara and ak make up {{families.tr_kara_ak_pct|f1}}\% of colour names, and Karasu, black water, occurs {{families.karasu|int}} times. Mongolian favours white ({{lang.mn.white|f1}}\%, \textit{tsagaan}), then black ({{lang.mn.black|f1}}\%, \textit{khar}, mostly in Buryatia) and red ({{lang.mn.red|f1}}\%, \textit{ulaan}). Arabic ({{lang.ar.red|f1}}\%) and the East Slavic languages ({{lang.eslav.red|f1}}\%) are the reddest: aḥmar and ḥamrāʼ for desert rock and sand, krasnyy for villages. Spanish is the whitest of the large languages ({{lang.es.white|f1}}\% white), and the commonest colour name in the world is the Spanish Cerro Colorado ({{families.cerro_colorado|int}} names), followed by Cerro Blanco ({{families.cerro_blanco|int}}) and Cerro Negro ({{families.cerro_negro|int}}). Unlike most languages, Spanish and Portuguese rivers are whiter than black ({{families.iberian_river_white_pct|f1}}\% against {{families.iberian_river_black_pct|f1}}\%; {{families.rio_blanco|int}} Río Blanco against {{families.rio_negro|int}} Río Negro). In Chinese, bai (white, {\cjk 白}) and huang (yellow, {\cjk 黄}) make up {{families.zh_white_yellow_pct|f1}}\% of colour names (Figure~\ref{fig:families}).
+
+{{TABLE_LANGS}}
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_families.jpg}
+\caption{Three colour families: the Turkic and Persian lands, Latin America and China (plate carrée at each panel's middle latitude).}\label{fig:families}\end{figure}
+
+\subsection{Countries}
+In the {{countries.with30|int}} countries with at least 30 names, the commonest colour is white in {{countries.top_count.white|int}}, black in {{countries.top_count.black|int}}, red in {{countries.top_count.red|int}}, green in {{countries.top_count.green|int}}, yellow in {{countries.top_count.yellow|int}} and blue-green in {{countries.top_count.grue|int}} (South Korea); blue leads in none (Figure~\ref{fig:countries}). Black leads in the English-speaking countries, the Nordic countries, Turkey, Central Asia, Iran and Afghanistan; white in most of Latin America, Mongolia, Serbia, North Macedonia, Poland and South Africa; red in Russia, Belarus and much of the Arab world; yellow in China. By the ratio of black to white names (Figure~\ref{fig:bw}), {{countries.black_majority|int}} countries have more black than white names and {{countries.white_majority|int}} more white than black. With \textit{kvit} from the second pass, Norway's ratio is {{country.NO.black_white|f1}} to one. The most extreme ratios now come from the narrow Hindi and Urdu rule: India ({{country.IN.black_white|f1}}) and Pakistan ({{country.PK.black_white|f1}}) look very black because nearly all the names it accepts are \textit{kala}.
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_countries.jpg}
+\caption{The commonest colour among each country's colour names, countries with at least 30 names.}\label{fig:countries}\end{figure}
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_bw.jpg}
+\caption{Ratio of black to white colour names, countries with at least 30 names (log scale).}\label{fig:bw}\end{figure}
+
+\subsection{Hotspots}
+On a two-degree grid the densest cell of black names is in central Norway ({{hotspots.black.n|int}} names), of white and red names in central Mexico ({{hotspots.white.n|int}} and {{hotspots.red.n|int}}), of green and blue names in western Norway, and of yellow names in southern China ({{hotspots.yellow.n|int}}). These follow the gazetteer's density as much as naming habits.
+
+\subsection{Red: revolution and earth}
+Of {{political.eslav_red|int}} red names in Russian, Ukrainian and Belarusian, {{political.eslav|int}} ({{political.eslav_pct|f1}}\%) are revolutionary; of {{political.zh_red|int}} Chinese red names, {{political.zh|int}} ({{political.zh_pct|f1}}\%). Without them, red would fall from {{political.eslav_red_pct|f1}}\% to {{political.eslav_red_pct_without|f1}}\% of East Slavic colour names. Some of the remaining East Slavic red is not colour at all: \textit{krasnyy} long meant beautiful, so a Krasnaya Polyana may be a fair glade. Of {{earth.n|int}} names of earth, soil, sand and clay, {{earth.red|int}} ({{earth.red_pct|f1}}\%) are red, close to the share of red among all names ({{colour_pct.red|f1}}\%); {{earth.white|int}} are white (Tierra Blanca alone {{families.tierra_blanca|int}} times) and {{earth.yellow|int}} yellow (Figure~\ref{fig:red}).
+
+\begin{figure}[tbp]\centering\includegraphics[width=\textwidth]{f_red.png}
+\caption{Left: revolutionary red among East Slavic and Chinese red names. Right: colours of names of earth, soil, sand and clay.}\label{fig:red}\end{figure}
+
+\subsection{Precision}
+After tuning, {{precision.correct|int}} of {{precision.sampled|int}} sampled names were judged correct ({{precision.overall_pct|int}}\%; {{precision.weighted|f2}} when each language and colour cell is weighted by its number of names). The lowest cell with at least 20 names sampled reaches {{precision.min_cell|f2}}. English ({{precision.by_lang.en|f2}}) and Chinese ({{precision.by_lang.zh|f2}}) are the weakest languages, for family names and names written in sound (Figure~\ref{fig:precision}).
+
+\begin{figure}[tbp]\centering\includegraphics[width=0.85\textwidth]{f_precision.png}
+\caption{Names judged correct in the review samples, by language (names sampled in brackets).}\label{fig:precision}\end{figure}
+
+\section{Limitations}
+First, recall is limited by the searches that produced the candidates and by the strictness of the rules. The second pass filled the largest gaps of the first (English and Turkic compounds, Norwegian \textit{kvit}, Mongolian), but Korean, Hindi and Urdu are covered only where the meaning is clear, which favours some colours (black in South Asia); Afrikaans \textit{rooi} and \textit{swart}, Persian \textit{kabud}, and whole languages (Hungarian, Finnish, Greek, Malay and Indonesian, Pashto and the languages of Africa) are missing. The second pass was reviewed with only 50 names per rule. Second, GeoNames is uneven: counts follow the density of national gazetteers and include duplicates of the same feature. Third, precision is measured on samples that also guided the rules, so it is optimistic, and some judgements are uncertain: whether a Spanish \textit{Loma Los Negros} names the colour or people, or a Chinese {\cjk 黄} village a family. Fourth, a colour word does not tell us why the place was so named: Black can be peat, shade, a forest, a fearful reputation or a direction (in the Turkic tradition black has been read as north and white as west, \citealp{wikiblacksea}). Fifth, the six colours and blue-green are this study's categories, not the languages' own.
+
+\section{Conclusion}
+The colours of the world's place names follow the oldest colour words: white, black and red make up most of them, blue is rare. Each kind of place has a leaning, black for rivers and dark water, white for springs, red for rock and bare ground, and each language has its favourite word, from svart and siāh to blanco and huang. A good part of the red, though, is not the colour of the land but of twentieth-century flags.
+
+\section*{Data and code availability}
+The interactive map is at \url{{{meta.page}}}. Data and code are at \url{{{meta.repo}}} and archived with this paper at \url{https://doi.org/{{meta.doi}}}. Derived data are released under CC BY 4.0 and code under the MIT licence. Place names are from GeoNames (CC BY 4.0); country outlines from Natural Earth (public domain); the map style uses OpenStreetMap data (ODbL).
+
+\section*{AI statement}
+I wrote the text, with drafting and editing assistance from Claude (Anthropic), which also helped prepare the analysis code. I reviewed and checked all text and results.
+
+\begin{thebibliography}{9}
+\bibitem[Berlin and Kay(1969)]{berlinkay} Berlin, B. and Kay, P. (1969) \textit{Basic Color Terms: Their Universality and Evolution}. Berkeley: University of California Press.
+\bibitem[GeoNames(2026)]{geonames} GeoNames (2026) GeoNames geographical database, allCountries dump. CC BY 4.0. \url{https://www.geonames.org/}
+\bibitem[Hotham(2026)]{inkmap} Hotham, T. (2026) The Inked World: a zoomable hand-inked style world map from open data. \url{https://maps.tristanhotham.com/ink-map/}
+\bibitem[Natural Earth(2026)]{naturalearth} Natural Earth (2026) Admin 0 countries and land, 1:50m. Public domain. \url{https://www.naturalearthdata.com/}
+\bibitem[\v{S}avri\v{c} et al.(2019)]{equalearth} \v{S}avri\v{c}, B., Patterson, T. and Jenny, B. (2019) The Equal Earth map projection. \textit{International Journal of Geographical Information Science} 33(3), 454 to 465.
+\bibitem[Wikipedia(2026)]{wikiblacksea} Wikipedia contributors (2026) Black Sea: name. CC BY-SA 4.0. \url{https://en.wikipedia.org/wiki/Black_Sea}
+\end{thebibliography}
+
+\clearpage
+\appendix
+\section{The classifier's colour words}
+{{TABLE_RULES}}
+
+\section{The most repeated colour names}
+{{TABLE_TOP}}
+\end{document}

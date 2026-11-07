@@ -1,0 +1,10 @@
+ftype,kind,n,black_pct,white_pct,red_pct,green_pct,blue_pct,yellow_pct,grue_pct,black_eq,white_eq,red_eq,green_eq,blue_eq,yellow_eq,grue_eq,langs_eq
+river,"Rivers, streams and wadis",19269,32.8,26.8,17.4,8.8,7.9,6.2,0.1,37.2,29.1,15.0,6.6,3.8,7.4,0.9,17
+lake,"Lakes, ponds and marshes",10848,32.1,21.5,16.7,14.0,11.1,4.0,0.6,30.1,29.2,16.8,9.9,6.4,6.5,1.0,14
+spring,Springs and wells,3384,24.0,31.4,20.0,5.0,12.0,7.4,0.1,14.8,42.7,21.5,6.6,7.1,7.2,0.0,7
+sea,"Seas, bays and coasts",1793,30.4,21.8,15.7,18.9,7.1,4.7,1.4,28.1,24.8,16.8,11.5,4.5,6.0,8.2,7
+mountain,Mountains and hills,25784,31.1,23.0,21.9,10.5,6.1,7.1,0.3,27.6,28.4,23.4,9.1,4.0,5.9,1.6,17
+rock,"Rocks, cliffs and islands",6265,31.2,24.1,17.8,16.6,3.1,6.2,0.8,26.0,24.7,24.2,11.7,2.9,7.5,3.0,12
+valley,"Valleys, gorges and passes",4971,30.8,22.5,19.3,13.3,6.9,7.0,0.2,27.9,27.6,20.6,10.8,4.2,8.9,0.0,10
+land,"Plains, deserts, woods and areas",4801,24.8,26.9,25.1,9.6,5.4,8.0,0.3,22.7,29.8,22.1,10.8,3.4,10.0,1.2,14
+settlement,Towns and villages,61338,13.5,29.2,21.8,9.7,3.3,16.1,6.4,23.4,28.0,20.3,14.9,3.6,6.7,3.1,19

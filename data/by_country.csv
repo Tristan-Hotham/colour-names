@@ -1,0 +1,215 @@
+cc,black,white,red,green,blue,yellow,grue,n,top,top_pct,second,black_white,main_lang,country
+CN,2381,8481,5133,358,230,8656,3830,29069,yellow,29.8,white,0.28,zh,China
+US,3813,2936,3429,2876,2457,709,0,16220,black,23.5,red,1.3,en,United States of America
+MX,779,5705,3882,2063,795,522,0,13746,white,41.5,red,0.14,es,Mexico
+NO,3975,1409,486,2081,642,194,0,8787,black,45.2,green,2.82,nord,Norway
+IR,3617,2174,994,363,1,1286,0,8435,black,42.9,white,1.66,fa,Iran
+RU,2139,1526,3356,588,185,279,0,8073,red,41.6,black,1.4,eslav,Russia
+BR,1210,1491,640,690,386,116,0,4533,white,32.9,black,0.81,pt,Brazil
+TR,1429,1021,530,431,523,356,0,4290,black,33.3,white,1.4,tr,Turkey
+KZ,1471,1139,633,19,354,571,0,4187,black,35.1,white,1.29,tr,Kazakhstan
+CA,1187,691,765,819,351,145,0,3958,black,30.0,green,1.72,en,Canada
+AU,541,400,503,253,161,83,0,1941,black,27.9,red,1.35,en,Australia
+JP,518,549,470,146,0,16,218,1917,white,28.6,black,0.94,ja,Japan
+AF,1218,99,85,157,14,287,0,1860,black,65.5,yellow,12.25,fa,Afghanistan
+AR,466,477,412,151,73,64,0,1643,white,29.0,black,0.98,es,Argentina
+DE,496,308,537,211,48,14,0,1614,red,33.3,black,1.61,de,Germany
+PE,320,651,297,156,98,23,0,1545,white,42.1,black,0.49,es,Peru
+VE,513,364,199,122,154,162,0,1514,black,33.9,white,1.41,es,Venezuela
+CO,411,413,245,103,100,73,0,1345,white,30.7,black,1.0,es,Colombia
+CL,379,456,214,114,61,68,0,1292,white,35.3,black,0.83,es,Chile
+KG,368,281,199,4,48,122,0,1022,black,36.0,white,1.31,tr,Kyrgyzstan
+GB,343,329,94,218,19,3,0,1006,black,34.1,white,1.04,en,United Kingdom
+YE,165,133,267,76,5,37,0,683,red,39.1,black,1.24,ar,Yemen
+BY,119,133,310,76,9,4,0,651,red,47.6,white,0.9,eslav,Belarus
+SE,250,92,120,74,27,45,0,608,black,41.1,red,2.71,nord,Sweden
+ZA,38,345,50,105,17,48,0,603,white,57.2,green,0.11,nl,South Africa
+AT,224,144,131,87,12,3,0,601,black,37.3,white,1.55,de,Austria
+PL,193,251,51,76,0,8,0,579,white,43.4,black,0.77,pl,Poland
+PA,74,206,129,61,66,42,0,578,white,35.6,red,0.36,es,Panama
+CU,58,231,174,45,39,18,0,565,white,40.9,red,0.25,es,Cuba
+GT,93,227,104,77,35,7,0,543,white,41.8,red,0.41,es,Guatemala
+UA,17,21,281,221,2,1,0,543,red,51.7,green,0.81,eslav,Ukraine
+DO,46,253,137,54,28,18,0,536,white,47.2,red,0.18,es,Dominican Rep.
+NZ,175,85,106,74,77,10,0,527,black,33.2,red,2.05,en,New Zealand
+MN,9,272,171,9,0,64,0,525,white,51.8,red,0.03,mn,Mongolia
+HN,65,232,87,66,38,20,0,508,white,45.7,red,0.28,es,Honduras
+BO,93,161,113,101,22,14,0,504,white,31.9,red,0.58,es,Bolivia
+CH,143,57,205,32,29,5,0,471,red,43.5,black,2.5,de,Switzerland
+CR,118,154,66,38,70,17,0,463,white,33.3,black,0.77,es,Costa Rica
+FI,251,79,100,29,3,1,0,463,black,54.2,red,3.16,nord,Finland
+SY,77,145,168,15,32,23,0,460,red,36.5,white,0.53,ar,Syria
+FR,88,94,120,97,10,9,0,418,red,28.7,green,0.94,fr,France
+IT,64,131,139,48,6,2,0,390,red,35.6,white,0.49,it,Italy
+TW,15,136,100,11,7,35,66,370,white,36.8,red,0.11,zh,Taiwan
+PK,229,7,10,33,2,89,0,370,black,61.9,yellow,30.6,fa,Pakistan
+DZ,7,6,289,30,1,17,0,350,red,82.6,green,1.15,ar,Algeria
+CV,92,129,82,25,0,5,0,333,white,38.7,black,0.71,pt,Cabo Verde
+EC,62,119,43,59,19,20,0,322,white,37.0,black,0.52,es,Ecuador
+EG,22,78,120,37,31,22,0,310,red,38.7,white,0.29,ar,Egypt
+MA,9,33,198,18,4,6,0,268,red,73.9,white,0.28,ar,Morocco
+UZ,87,69,59,0,23,27,0,265,black,32.8,white,1.26,tr,Uzbekistan
+ES,66,122,36,27,2,7,0,260,white,46.9,black,0.54,es,Spain
+AZ,155,11,48,1,0,36,0,251,black,61.8,red,13.52,tr,Azerbaijan
+HT,25,66,122,11,22,2,0,248,red,49.2,white,0.38,fr,Haiti
+TM,109,65,38,1,3,14,0,230,black,47.4,white,1.67,tr,Turkmenistan
+LY,30,76,88,7,8,14,0,223,red,39.5,white,0.4,ar,Libya
+SA,35,52,55,24,3,50,0,219,red,25.1,white,0.68,ar,Saudi Arabia
+IE,113,54,14,20,4,12,0,217,black,52.1,white,2.08,en,Ireland
+SD,11,47,83,10,35,17,0,203,red,40.9,white,0.24,ar,Sudan
+LB,3,8,125,17,12,27,0,192,red,65.1,yellow,0.41,ar,Lebanon
+PT,36,67,15,48,7,17,0,190,white,35.3,green,0.54,pt,Portugal
+MK,0,152,0,7,0,0,0,159,white,95.6,green,0.0,sslav,North Macedonia
+UY,38,56,26,25,3,6,0,154,white,36.4,black,0.68,es,Uruguay
+IQ,48,29,40,18,8,4,0,147,black,32.7,red,1.64,ar,Iraq
+RS,0,126,0,20,0,0,0,146,white,86.3,green,0.0,sslav,Serbia
+KR,31,29,0,0,0,22,59,141,grue,41.8,black,1.07,ko,South Korea
+JM,25,26,19,44,16,0,0,130,green,33.8,white,0.96,en,Jamaica
+IN,81,2,20,14,2,4,0,123,black,65.9,red,32.6,hi,India
+BE,32,21,29,22,10,2,0,116,black,27.6,red,1.51,nl,Belgium
+BG,64,41,0,4,3,0,0,112,black,57.1,white,1.55,sslav,Bulgaria
+PY,25,29,6,35,13,3,0,111,green,31.5,white,0.86,es,Paraguay
+JO,1,47,24,8,15,15,0,110,white,42.7,red,0.03,ar,Jordan
+PH,16,32,17,41,1,2,0,109,green,37.6,white,0.51,en,Philippines
+TN,2,0,95,5,0,6,0,108,red,88.0,yellow,5.0,ar,Tunisia
+NL,47,26,8,12,11,4,0,108,black,43.5,white,1.79,nl,Netherlands
+TJ,27,35,21,0,7,16,0,106,white,33.0,black,0.77,tr,Tajikistan
+OM,19,25,23,29,1,7,0,104,green,27.9,white,0.76,ar,Oman
+SV,15,42,14,21,8,3,0,103,white,40.8,green,0.36,es,El Salvador
+NI,26,32,18,14,8,1,0,99,white,32.3,black,0.82,es,Nicaragua
+MR,4,5,31,59,0,0,0,99,green,59.6,red,0.82,ar,Mauritania
+AQ,35,18,15,23,4,1,0,96,black,36.5,green,1.92,en,Antarctica
+HK,1,38,8,0,5,28,12,92,white,41.3,yellow,0.04,zh,Hong Kong
+NP,79,0,4,1,0,0,0,84,black,94.0,red,159.0,hi,Nepal
+RE,13,13,34,6,4,8,0,78,red,43.6,black,1.0,fr,RE
+PR,9,23,9,28,7,2,0,78,green,35.9,white,0.4,es,Puerto Rico
+DK,0,27,15,21,6,2,0,71,white,38.0,green,0.02,nord,Denmark
+BS,17,17,11,13,5,2,0,65,black,26.2,white,1.0,en,Bahamas
+BZ,17,17,5,2,15,0,0,56,black,30.4,white,1.0,en,Belize
+IS,39,16,0,0,1,0,0,56,black,69.6,white,2.39,nord,Iceland
+MQ,9,11,20,11,1,1,0,53,red,37.7,white,0.83,fr,MQ
+BA,0,2,0,50,0,0,0,52,green,96.2,white,0.2,sslav,Bosnia and Herz.
+NA,24,5,17,2,4,0,0,52,black,46.2,red,4.45,de,Namibia
+GP,9,10,20,3,5,2,0,49,red,40.8,white,0.9,fr,GP
+KP,0,0,0,0,0,47,0,47,yellow,100.0,white,1.0,ko,North Korea
+TF,14,4,12,7,6,3,0,46,black,30.4,red,3.22,fr,Fr. S. Antarctic Lands
+GY,15,16,8,1,5,0,0,45,white,35.6,black,0.94,en,Guyana
+GF,2,23,11,5,2,1,0,44,white,52.3,red,0.11,fr,GF
+MU,17,4,12,1,5,0,0,39,black,43.6,red,3.89,fr,Mauritius
+TT,12,8,9,3,6,0,0,38,black,31.6,red,1.47,en,Trinidad and Tobago
+FK,11,12,2,11,0,1,0,37,white,32.4,black,0.92,en,Falkland Is.
+SJ,14,0,1,16,3,1,0,35,green,45.7,black,29.0,nord,SJ
+AO,16,10,3,1,3,0,0,33,black,48.5,white,1.57,pt,Angola
+AE,2,14,7,7,1,0,0,31,white,45.2,red,0.17,ar,United Arab Emirates
+PG,10,4,3,8,2,2,0,29,black,34.5,green,2.33,en,Papua New Guinea
+EH,3,13,11,1,0,0,0,28,white,46.4,red,0.26,ar,W. Sahara
+RO,1,0,0,27,0,0,0,28,green,96.4,black,3.0,ro,Romania
+PS,1,9,9,0,7,1,0,27,white,33.3,red,0.16,ar,Palestine
+SH,4,9,6,4,3,0,0,26,white,34.6,red,0.47,en,Saint Helena
+PM,7,5,4,6,2,1,0,25,black,28.0,green,1.36,fr,St. Pierre and Miquelon
+VG,10,7,6,2,0,0,0,25,black,40.0,white,1.4,en,British Virgin Is.
+GL,1,0,16,3,3,2,0,25,red,64.0,blue,3.0,nord,Greenland
+NC,6,7,3,4,3,0,0,23,white,30.4,black,0.87,fr,New Caledonia
+GD,7,3,4,2,3,0,0,19,black,36.8,red,2.14,en,Grenada
+BM,3,3,4,4,4,0,0,18,red,22.2,blue,1.0,en,Bermuda
+CY,12,4,0,0,1,0,0,17,black,70.6,white,2.78,tr,Cyprus
+SS,0,5,3,5,4,0,0,17,white,29.4,green,0.09,ar,S. Sudan
+AG,3,1,4,7,1,0,0,16,green,43.8,red,2.33,en,Antigua and Barb.
+ID,2,1,5,1,6,0,0,15,blue,40.0,red,1.67,en,Indonesia
+VI,3,3,4,3,2,0,0,15,red,26.7,black,1.0,en,U.S. Virgin Is.
+ME,0,4,0,10,0,0,0,14,green,71.4,white,0.11,sslav,Montenegro
+LV,1,4,9,0,0,0,0,14,red,64.3,white,0.33,eslav,Latvia
+AD,2,7,5,0,0,0,0,14,white,50.0,red,0.33,es,Andorra
+QA,4,5,2,0,3,0,0,14,white,35.7,black,0.82,ar,Qatar
+GG,9,2,2,0,0,1,0,14,black,64.3,white,3.8,fr,Guernsey
+LR,4,3,1,3,0,2,0,13,black,30.8,white,1.29,en,Liberia
+MY,2,5,0,2,2,1,0,12,white,41.7,black,0.45,en,Malaysia
+IL,0,0,9,1,1,1,0,12,red,75.0,blue,1.0,ar,Israel
+BB,1,3,0,6,1,0,0,11,green,54.5,white,0.43,en,Barbados
+LI,4,0,6,0,1,0,0,11,red,54.5,black,9.0,de,Liechtenstein
+ST,5,1,1,3,1,0,0,11,black,45.5,green,3.67,pt,São Tomé and Principe
+FO,2,4,1,4,0,0,0,11,white,36.4,green,0.56,nord,Faeroe Is.
+ML,1,0,7,2,0,0,0,10,red,70.0,green,3.0,ar,Mali
+VU,4,2,0,4,0,0,0,10,black,40.0,green,1.8,en,Vanuatu
+GW,0,6,2,2,0,0,0,10,white,60.0,red,0.08,pt,Guinea-Bissau
+TC,1,4,2,0,3,0,0,10,white,40.0,blue,0.33,en,Turks and Caicos Is.
+LC,6,0,2,1,0,1,0,10,black,60.0,red,13.0,fr,Saint Lucia
+KE,3,3,2,1,1,0,0,10,black,30.0,white,1.0,en,Kenya
+MF,1,1,6,1,0,0,0,9,red,66.7,black,1.0,fr,St-Martin
+CG,6,0,1,1,1,0,0,9,black,66.7,red,13.0,fr,Congo
+PF,4,1,3,0,1,0,0,9,black,44.4,red,3.0,fr,Fr. Polynesia
+JE,4,1,2,2,0,0,0,9,black,44.4,red,3.0,fr,Jersey
+ZW,1,4,0,4,0,0,0,9,white,44.4,green,0.33,en,Zimbabwe
+VN,4,0,2,1,0,1,0,8,black,50.0,red,9.0,fr,Vietnam
+MM,3,4,0,1,0,0,0,8,white,50.0,black,0.78,en,Myanmar
+VC,6,0,2,0,0,0,0,8,black,75.0,red,13.0,en,St. Vin. and Gren.
+MG,6,0,1,1,0,0,0,8,black,75.0,red,13.0,fr,Madagascar
+AW,1,4,2,0,0,0,0,7,white,57.1,red,0.33,es,Aruba
+TD,0,0,6,1,0,0,0,7,red,85.7,green,1.0,ar,Chad
+GE,4,1,0,2,0,0,0,7,black,57.1,green,3.0,eslav,Georgia
+GS,4,0,0,1,2,0,0,7,black,57.1,blue,9.0,en,S. Geo. and the Is.
+FJ,5,1,0,0,1,0,0,7,black,71.4,white,3.67,en,Fiji
+ZM,3,3,1,0,0,0,0,7,black,42.9,white,1.0,en,Zambia
+MZ,0,1,4,2,0,0,0,7,red,57.1,green,0.33,pt,Mozambique
+SB,3,4,0,0,0,0,0,7,white,57.1,black,0.78,en,Solomon Is.
+KN,1,3,1,1,0,0,0,6,white,50.0,black,0.43,en,St. Kitts and Nevis
+SI,0,5,1,0,0,0,0,6,white,83.3,red,0.09,es,Slovenia
+SR,1,4,0,0,1,0,0,6,white,66.7,black,0.33,nl,Suriname
+LK,1,3,1,1,0,0,0,6,white,50.0,black,0.43,en,Sri Lanka
+YT,0,2,2,1,0,0,0,5,white,40.0,red,0.2,fr,YT
+EE,0,0,5,0,0,0,0,5,red,100.0,black,1.0,fr,Estonia
+SX,0,1,4,0,0,0,0,5,red,80.0,white,0.33,en,Sint Maarten
+,1,0,2,0,0,2,0,5,red,40.0,yellow,3.0,en,
+BD,3,0,0,1,0,0,0,4,black,75.0,green,7.0,hi,Bangladesh
+KY,0,2,2,0,0,0,0,4,white,50.0,red,0.2,en,Cayman Is.
+MS,2,1,0,0,0,1,0,4,black,50.0,white,1.67,en,Montserrat
+NG,1,0,0,1,0,2,0,4,yellow,50.0,green,3.0,en,Nigeria
+SN,0,0,2,2,0,0,0,4,red,50.0,green,1.0,fr,Senegal
+BQ,1,2,0,1,0,0,0,4,white,50.0,black,0.6,en,BQ
+ET,0,0,0,1,3,0,0,4,blue,75.0,green,1.0,en,Ethiopia
+CI,0,1,2,0,1,0,0,4,red,50.0,white,0.33,fr,Côte d'Ivoire
+GA,3,0,0,0,1,0,0,4,black,75.0,blue,7.0,fr,Gabon
+DJ,2,0,1,0,0,0,0,3,black,66.7,red,5.0,fr,Djibouti
+HM,2,0,1,0,0,0,0,3,black,66.7,red,5.0,en,Heard I. and McDonald Is.
+GH,2,0,1,0,0,0,0,3,black,66.7,red,5.0,en,Ghana
+GR,1,1,1,0,0,0,0,3,black,33.3,white,1.0,en,Greece
+TZ,0,1,1,0,1,0,0,3,white,33.3,red,0.33,en,Tanzania
+SC,0,0,2,0,1,0,0,3,red,66.7,blue,1.0,fr,Seychelles
+LT,0,1,2,0,0,0,0,3,red,66.7,white,0.33,eslav,Lithuania
+LU,1,2,0,0,0,0,0,3,white,66.7,black,0.6,fr,Luxembourg
+SZ,2,1,0,0,0,0,0,3,black,66.7,white,1.67,en,eSwatini
+BL,0,0,2,0,0,0,0,2,red,100.0,black,1.0,fr,St-Barthélemy
+BF,0,2,0,0,0,0,0,2,white,100.0,black,0.2,en,Burkina Faso
+GQ,2,0,0,0,0,0,0,2,black,100.0,white,5.0,es,Eq. Guinea
+MD,0,0,0,2,0,0,0,2,green,100.0,white,1.0,eslav,Moldova
+WF,0,0,0,2,0,0,0,2,green,100.0,white,1.0,fr,Wallis and Futuna Is.
+SG,0,0,2,0,0,0,0,2,red,100.0,black,1.0,en,Singapore
+SL,1,1,0,0,0,0,0,2,black,50.0,white,1.0,en,Sierra Leone
+TL,0,1,0,1,0,0,0,2,white,50.0,green,0.33,pt,Timor-Leste
+NF,0,1,1,0,0,0,0,2,white,50.0,red,0.33,en,Norfolk Island
+BT,2,0,0,0,0,0,0,2,black,100.0,white,5.0,en,Bhutan
+KM,2,0,0,0,0,0,0,2,black,100.0,white,5.0,fr,Comoros
+GN,0,1,0,0,1,0,0,2,white,50.0,blue,0.33,en,Guinea
+DM,1,0,0,0,0,1,0,2,black,50.0,yellow,3.0,fr,Dominica
+CW,1,0,0,0,1,0,0,2,black,50.0,blue,3.0,es,Curaçao
+CD,0,0,0,1,1,0,0,2,green,50.0,blue,1.0,fr,Dem. Rep. Congo
+AS,0,0,1,0,0,0,0,1,red,100.0,black,1.0,en,American Samoa
+AI,0,1,0,0,0,0,0,1,white,100.0,black,0.33,en,Anguilla
+CX,0,1,0,0,0,0,0,1,white,100.0,black,0.33,en,CX
+BH,0,0,0,1,0,0,0,1,green,100.0,white,1.0,ar,Bahrain
+GI,0,1,0,0,0,0,0,1,white,100.0,black,0.33,en,GI
+FM,0,0,0,1,0,0,0,1,green,100.0,white,1.0,en,Micronesia
+ER,0,0,0,0,0,1,0,1,yellow,100.0,white,1.0,ar,Eritrea
+CM,1,0,0,0,0,0,0,1,black,100.0,white,3.0,en,Cameroon
+CF,0,1,0,0,0,0,0,1,white,100.0,black,0.33,es,Central African Rep.
+BV,1,0,0,0,0,0,0,1,black,100.0,white,3.0,en,BV
+IO,0,0,0,1,0,0,0,1,green,100.0,white,1.0,fr,Br. Indian Ocean Ter.
+HU,0,0,0,1,0,0,0,1,green,100.0,white,1.0,fr,Hungary
+MW,1,0,0,0,0,0,0,1,black,100.0,white,3.0,en,Malawi
+MP,1,0,0,0,0,0,0,1,black,100.0,white,3.0,en,N. Mariana Is.
+MO,0,0,0,0,0,0,1,1,grue,100.0,white,1.0,zh,Macao
+LS,0,1,0,0,0,0,0,1,white,100.0,black,0.33,en,Lesotho
+IM,0,1,0,0,0,0,0,1,white,100.0,black,0.33,en,Isle of Man
+SO,1,0,0,0,0,0,0,1,black,100.0,white,3.0,ar,Somalia
+UG,0,1,0,0,0,0,0,1,white,100.0,black,0.33,en,Uganda
+XK,0,0,1,0,0,0,0,1,red,100.0,black,1.0,en,Kosovo

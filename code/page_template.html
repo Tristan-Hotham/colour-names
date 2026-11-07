@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The colours of the world's place names</title>
+<meta name="description" content="{{source.main|int}} places named after a colour, from Cerro Colorado to Kara Su and Baishui, mapped by colour, language and kind of place on a hand-inked world map. From GeoNames.">
+<meta property="og:title" content="The colours of the world's place names">
+<meta property="og:description" content="Black rivers, white springs, red Soviet villages and yellow Chinese loess: {{source.main|int}} colour names in {{source.languages|int}} languages, mapped.">
+<meta property="og:image" content="https://maps.tristanhotham.com/colour-names/header.png">
+<meta property="og:url" content="https://maps.tristanhotham.com/colour-names/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=MedievalSharp&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<style>
+:root{
+  --bg:#F6EED8; --panel:#EFE3C4; --fg:#2B2119; --muted:#6E604E; --rule:#E2D3AE; --card:#FBF5E4; --border:#D3C29A;
+  --hot:#A3261B; --cool:#3D6E9E;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --hand:"MedievalSharp","Fraunces",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1A1612; --panel:#241E18; --fg:#EFE6D4; --muted:#ADA08B; --rule:#3A3128; --card:#211B15; --border:#4D4234; --hot:#E07A6C; --cool:#8FB4DA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1612; --panel:#241E18; --fg:#EFE6D4; --muted:#ADA08B; --rule:#3A3128; --card:#211B15; --border:#4D4234; --hot:#E07A6C; --cool:#8FB4DA; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 64px}
+a{color:inherit;text-decoration-color:var(--hot);text-underline-offset:3px}
+.kicker{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.kicker b{background:#A3261B;color:#fff;padding:5px 8px;font-weight:500}
+.byline{font:400 13px/1.4 var(--mono);color:var(--muted);margin-top:14px}
+h2{font:800 34px/1.04 var(--display);letter-spacing:-.01em;margin:54px 0 10px;text-wrap:balance}
+h2 .n{font:500 13px/1 var(--mono);color:var(--hot);display:block;letter-spacing:.1em;margin-bottom:10px}
+p{margin:0 0 16px}
+.lede::first-letter{font:400 76px/.8 var(--hand);float:left;margin:6px 10px 0 0;color:var(--hot)}
+.src{font:400 12px/1.45 var(--mono);color:var(--muted);margin-top:10px}
+ul.plain{padding-left:20px} ul.plain li{margin:4px 0}
+details{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 0;margin:18px 0;font-size:16px}
+summary{font:500 13px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 0}
+.cta a{font:500 13px/1 var(--mono);text-decoration:none;border:1px solid var(--fg);padding:11px 14px;border-radius:3px}
+.cta a.p{background:#A3261B;border-color:#A3261B;color:#fff}
+footer{border-top:6px double var(--fg);margin-top:56px;padding-top:16px;font:400 13px/1.55 var(--mono);color:var(--muted)}
+footer p{margin:0 0 10px}
+.theme{font:500 12px/1 var(--mono);background:var(--card);color:var(--fg);border:1px solid var(--border);border-radius:3px;padding:4px 8px;cursor:pointer;min-height:28px}
+.figure{margin:22px 0}
+.figure img{width:100%;display:block;border:1px solid var(--border)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:22px 0}
+.stat{border:1px solid var(--border);background:var(--card);padding:10px 12px}
+.stat b{display:block;font:800 30px/1 var(--display);color:var(--hot)}
+.stat span{font:400 12.5px/1.35 var(--mono);color:var(--muted)}
+table.words{border-collapse:collapse;width:100%;font:400 13px/1.35 var(--mono);margin:12px 0}
+table.words th,table.words td{border-bottom:1px solid var(--rule);padding:5px 6px;text-align:left;vertical-align:top}
+table.words th{font-weight:500;color:var(--muted)}
+.tw{overflow-x:auto}
+.sw{display:inline-block;width:11px;height:11px;border-radius:50%;border:1.2px solid #2B2119;vertical-align:-1px;margin-right:5px}
+
+/* ---- the map ---- */
+.topbar{height:40px;display:flex;align-items:center;gap:14px;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:0 max(14px,env(safe-area-inset-left,0px));border-bottom:3px double var(--fg);background:var(--bg);overflow:hidden;white-space:nowrap}
+.tb-name{font:400 19px/1 var(--hand);color:var(--hot);text-decoration:none;letter-spacing:.03em}
+.tb-k{font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tb-links{margin-left:auto;display:flex;gap:16px;align-items:center;font:500 12px/1 var(--mono)}
+.tb-links a{text-decoration:none}.tb-links a:hover{text-decoration:underline}
+.mapband{width:100vw;margin-left:calc(50% - 50vw)}
+#map{position:relative;height:calc(100vh - 43px);height:calc(100svh - 43px);min-height:460px;border-bottom:1px solid #BCA676;background:#F3E5BF;overflow:hidden}
+#map::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;box-shadow:inset 0 0 90px rgba(120,84,30,.22), inset 0 0 18px rgba(120,84,30,.18)}
+.cartouche{position:absolute;left:14px;top:14px;z-index:5;max-width:min(330px,calc(100% - 28px));background:rgba(251,243,220,.95);color:#2B2119;border:2px solid #2B2119;outline:1px solid #2B2119;outline-offset:-6px;padding:10px 14px;box-shadow:0 3px 14px rgba(60,40,10,.22)}
+.cartouche::before,.cartouche::after{content:"";position:absolute;width:9px;height:9px;background:#A3261B;border:1px solid #2B2119;border-radius:50%}
+.cartouche::before{left:-6px;top:-6px}.cartouche::after{right:-6px;bottom:-6px}
+.cartouche h1{font:900 clamp(21px,2.2vw,28px)/1.02 var(--display);letter-spacing:-.015em;margin:6px 0 0;color:#2B2119}
+.cartouche h1 .a{color:#A3261B;font-family:var(--hand);font-weight:400;letter-spacing:.03em}
+.cartouche .dek{font-size:13.5px;line-height:1.36;margin:6px 0 0;color:#2B2119}
+.cartouche .byline{font:400 11px/1.35 var(--mono);color:#6E604E;margin-top:6px}
+.cartouche .kicker{color:#6E604E}
+.ct-fold{position:absolute;right:6px;top:5px;width:26px;height:26px;border:0;background:none;color:#A3261B;font:400 18px/1 var(--hand);cursor:pointer;padding:0}
+.ct-toggle{display:none;font:400 17px/1 var(--hand);color:#A3261B;background:none;border:0;padding:2px 0;cursor:pointer;min-height:30px}
+.cartouche.folded .ct-body,.cartouche.folded .ct-fold{display:none}.cartouche.folded .ct-toggle{display:block}.cartouche.folded{padding:4px 11px}
+.ov{position:absolute;z-index:5;font:400 13px/1.3 var(--mono);color:#2B2119}
+.ov-top{right:54px;top:10px;max-width:calc(100% - 420px);display:flex;flex-direction:column;gap:6px;align-items:flex-end;pointer-events:none}
+.ov-top>*{pointer-events:auto}
+.srch{position:relative;width:min(340px,100%)}
+.srch input{width:100%;font:400 15px/1 var(--mono);background:rgba(251,245,228,.96);color:#2B2119;border:1px solid #9C8656;border-radius:3px;padding:9px 10px;min-height:40px;box-shadow:0 1px 4px rgba(60,40,10,.18)}
+.srch input:focus-visible,.chip:focus-visible,.lp label:focus-within,.lp select:focus-visible{outline:2px solid #A3261B;outline-offset:2px}
+.sug{position:absolute;left:0;right:0;top:100%;margin:2px 0 0;padding:0;list-style:none;background:#FBF5E4;border:1px solid #9C8656;max-height:300px;overflow:auto;display:none;box-shadow:0 3px 10px rgba(60,40,10,.2);z-index:12}
+.sug li{padding:8px 10px;cursor:pointer;border-bottom:1px solid #E7D9B6}
+.sug li span{color:#7A6A52;font-size:12px}
+.sug li[aria-selected="true"],.sug li:hover{background:#EFE1BC}
+.chips{display:flex;gap:6px;overflow-x:auto;max-width:100%;scrollbar-width:none;padding-bottom:2px;justify-content:flex-end;flex-wrap:wrap}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font:500 12px/1 var(--mono);background:rgba(251,245,228,.94);color:#2B2119;border:1px solid #9C8656;border-radius:999px;padding:7px 10px;cursor:pointer;min-height:32px;white-space:nowrap;box-shadow:0 1px 3px rgba(60,40,10,.14);display:inline-flex;align-items:center;gap:6px}
+.chip:hover{background:#EFE1BC}
+.chip.lyr{background:#2B2119;color:#F6EED8;border-color:#2B2119}
+.chip.off{opacity:.42;text-decoration:line-through}
+.chip i{display:inline-block;width:12px;height:12px;border-radius:50%;border:1.3px solid #2B2119}
+.lp{position:absolute;right:54px;top:118px;z-index:9;background:rgba(251,245,228,.98);border:1px solid #9C8656;border-radius:4px;padding:10px 12px 8px;font:400 13px/1.3 var(--mono);color:#2B2119;box-shadow:0 3px 12px rgba(60,40,10,.25);display:none;width:270px;max-height:calc(100% - 132px);overflow:auto}
+.lp.open{display:block}
+.lp h4{margin:0 0 6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#7A6A52}
+.lp h5{margin:9px 0 1px;padding-top:7px;border-top:1px solid #E2D3AE;font:600 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#A3261B}
+.lp label{display:flex;gap:8px;align-items:center;padding:4px 0;cursor:pointer;min-height:30px}
+.lp input{accent-color:#A3261B;width:16px;height:16px;flex:none}
+.lp select{width:100%;font:400 13px/1 var(--mono);padding:6px;border:1px solid #9C8656;border-radius:3px;background:#fff;color:#2B2119;min-height:34px;margin:3px 0 6px}
+.lp .note{font-size:11.5px;color:#6E604E;margin:2px 0 4px}
+.lgd{position:absolute;left:12px;bottom:42px;z-index:4;background:rgba(251,245,228,.94);border:1px solid #9C8656;border-radius:3px;padding:7px 9px;font:400 11.5px/1.3 var(--mono);color:#2B2119;max-width:250px;display:none}
+.lgd.on{display:block}
+.lgd .bar{display:flex;height:10px;margin:4px 0 2px;border:1px solid #2B2119}
+.lgd .bar span{flex:1}
+.lgd .ends{display:flex;justify-content:space-between;color:#6E604E}
+.ov-br{position:absolute;left:12px;bottom:12px;z-index:4;font:400 11px/1.2 var(--mono);color:#6E604E;background:rgba(251,245,228,.85);padding:5px 7px;border-radius:3px;border:1px solid #D3C29A}
+.maplibregl-popup-content{background:#FBF5E4;color:#2B2119;font:400 13px/1.45 var(--mono);border:1px solid #9C8656;border-radius:4px;padding:10px 12px;box-shadow:0 3px 12px rgba(60,40,10,.25);max-width:290px}
+.maplibregl-popup-content b.t{display:block;font:400 19px/1.15 var(--hand);color:#A3261B;margin-bottom:3px}
+.maplibregl-popup-content .m{color:#6E604E}
+.maplibregl-popup-content a{color:#A3261B}
+.maplibregl-popup-content .cb{display:flex;height:9px;margin:6px 0 3px;border:1px solid #2B2119}
+.maplibregl-popup-tip{border-top-color:#9C8656!important;border-bottom-color:#9C8656!important}
+.maplibregl-ctrl-attrib{font:400 11px/1.3 var(--mono)!important;background:rgba(251,245,228,.85)!important}
+.maplibregl-ctrl-group{background:#FBF5E4!important;border:1px solid #9C8656}
+.nojs{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 14px var(--mono);color:#6E604E;padding:20px;text-align:center}
+@media (max-width:1000px){.ov-top{left:10px;right:54px;max-width:none;align-items:flex-start}.chips{justify-content:flex-start}.lp{left:10px;right:auto}.cartouche{top:auto;bottom:44px}}
+@media (max-width:600px){
+  #map{height:calc(100svh - 43px - 64px);min-height:440px}
+  .tb-k,.tb-links a:not(:first-of-type){display:none}
+  .ov-top{left:8px;top:8px}
+  .chips{flex-wrap:nowrap;overflow-x:auto}
+  .lp{top:96px;left:8px;right:8px;width:auto}
+  .cartouche{left:8px;bottom:36px;max-width:calc(100% - 60px);padding:8px 11px}
+  .cartouche h1{font-size:21px}.cartouche .dek{display:none}
+  .ct-toggle{display:block}.ct-fold{display:none}
+  .lgd{bottom:auto;top:96px;max-width:calc(100% - 70px)}
+  .ov-br{display:none}
+  h2{font-size:28px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="tb-name" href="#map">Colour names</a>
+  <span class="tb-k">Data study · 2026</span>
+  <nav class="tb-links"><a href="#essay">About</a><button class="theme" id="theme" aria-label="Toggle dark mode">◐</button><a href="https://doi.org/10.5281/zenodo.24043682">Paper</a><a href="{{REPO}}">Data and code</a></nav>
+</div>
+
+<div class="mapband">
+  <div id="map" data-fullscreen-map role="application" aria-label="Hand-inked world map of places named after a colour">
+    <div class="nojs" id="nojs">Loading the map. It needs JavaScript and WebGL.</div>
+    <div class="cartouche" id="cartouche">
+      <button class="ct-toggle" id="ctToggle" aria-expanded="true" title="Show the title">The colours of place names ▾</button>
+      <button class="ct-fold" id="ctFold" title="Fold the title" aria-label="Fold the title">▴</button>
+      <div class="ct-body">
+        <div class="kicker"><b>Data study</b><span>2026</span></div>
+        <h1>The <span class="a">colours</span> of the world's place names</h1>
+        <p class="dek">{{source.main|int}} rivers, hills, springs and villages named black, white, red, green, blue or yellow, in {{source.languages|int}} languages. Each dot is one name, tinted in its colour. Tap one to read it.</p>
+        <div class="byline">Dr Tristan Hotham · Independent researcher · 2026</div>
+      </div>
+    </div>
+    <div class="ov ov-top">
+      <div class="srch"><input type="search" id="q" placeholder="Find a name, place or country" aria-label="Find a name, place or country" autocomplete="off"><ul class="sug" id="sug" role="listbox"></ul></div>
+      <div class="chips" id="chips"><button class="chip lyr" id="lyrBtn" aria-expanded="false" aria-controls="lp">Layers and filters</button></div>
+    </div>
+    <div class="lp" id="lp" role="dialog" aria-label="Map layers and filters">
+      <h4>Colour names</h4>
+      <label><input type="checkbox" id="ptsBox" checked> A dot for every colour name</label>
+      <div class="note">Language</div>
+      <select id="langSel" aria-label="Language"><option value="">All languages</option></select>
+      <div class="note">Kind of place</div>
+      <select id="kindSel" aria-label="Kind of place"><option value="">Every kind of place</option></select>
+      <label><input type="checkbox" id="earthBox"> Only names of earth, soil and clay</label>
+      <label><input type="checkbox" id="polBox"> Only revolutionary red (Soviet and Chinese)</label>
+      <h5>Countries</h5>
+      <label><input type="radio" name="cn" value="" checked> No country shading</label>
+      <label><input type="radio" name="cn" value="top"> Most common colour</label>
+      <label><input type="radio" name="cn" value="bw"> Black against white</label>
+      <h5>The inked map</h5>
+      <label><input type="checkbox" data-g="mountains" checked> Ink mountains and hills</label>
+      <label><input type="checkbox" data-g="forests" checked> Forests, marsh and moor</label>
+      <label><input type="checkbox" data-g="biomes" checked> Deserts, grassland, jungle and ice</label>
+      <label><input type="checkbox" data-g="rivers" checked> Rivers and lakes</label>
+      <label><input type="checkbox" data-g="sea" checked> Sea shading and ripples</label>
+      <label><input type="checkbox" data-g="names" checked> Place names</label>
+      <label><input type="checkbox" data-g="borders" checked> Borders</label>
+      <label><input type="checkbox" data-g="roads" checked> Roads and tracks</label>
+      <label><input type="checkbox" data-g="tint" checked> Watercolour tints</label>
+      <label><input type="checkbox" data-g="hillshade"> Hill shading</label>
+      <label><input type="checkbox" id="modern"> Plain modern map, for finding your way</label>
+    </div>
+    <div class="lgd" id="lgd" aria-live="polite"></div>
+    <div class="ov-br" id="count" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="wrap" id="essay">
+<p class="lede" style="margin-top:26px">All over the world people have named places after their colour. A river runs dark with peat, so it is the Black Water, Kara Su or Río Negro. A spring bubbles out of chalk, so it is the White Well. A hill of iron-rich soil becomes Red Hill, Cerro Colorado or Krasnaya Gorka. I went through GeoNames, the largest open gazetteer, and picked out every name built on the word for black, white, red, green, blue or yellow in {{source.languages|int}} languages, then mapped them.</p>
+<p>The result is {{source.main|int}} names in {{source.countries|int}} countries and territories: natural features (rivers, lakes, springs, mountains, rocks, valleys, plains and seas) and towns and villages. Buildings, farms, hotels and roads are left out, because they so often take a colour from a brand or an owner. The map above shows every one as a dot in its own colour. The dots are dense where the gazetteer is dense, so read it as a map of naming habits, not of how many places exist.</p>
+<div class="byline">Dr Tristan Hotham · Independent researcher · 2026 · Data: GeoNames (CC BY 4.0); map: OpenStreetMap via OpenFreeMap, Natural Earth</div>
+
+<div class="stats">
+  <div class="stat"><b>{{colour_pct.white|f1}}%</b><span>of colour names are white, the most common colour</span></div>
+  <div class="stat"><b>{{words.river_black_eq|int}}%</b><span>of river names are black (languages weighted equally)</span></div>
+  <div class="stat"><b>{{words.spring_white_eq|int}}%</b><span>of springs and wells are white</span></div>
+  <div class="stat"><b>{{families.cerro_colorado|int}}</b><span>hills called Cerro Colorado, the commonest colour name of all</span></div>
+</div>
+
+<h2><span class="n">01 · Which colours</span>White first, then black and red</h2>
+<p>Of the {{source.main|int}} names, {{colour_pct.white|f1}}% are white, {{colour_pct.black|f1}}% black and {{colour_pct.red|f1}}% red; green has {{colour_pct.green|f1}}%, yellow {{colour_pct.yellow|f1}}% and blue only {{colour_pct.blue|f1}}%. Chinese and Japanese names are counted from their characters, and Chinese villages are so numerous in GeoNames that they tilt the totals; without them black ({{colour_pct_nozhja.black|f1}}%) edges ahead of white ({{colour_pct_nozhja.white|f1}}%), with red behind ({{colour_pct_nozhja.red|f1}}%). The order is the one linguists have long found in the colour words of the world's languages: black and white first, then red, then green and yellow, and blue last. Blue is a late word in many languages, and a place rarely looks blue unless it is water.</p>
+<div class="figure"><img src="img/mix.png" alt="Stacked bars of the share of each colour among place names in seventeen languages" loading="lazy"><p class="src">Share of each colour among the colour names of each language. Chinese and Japanese blue-green (qing, ao) is shown apart.</p></div>
+
+<h2><span class="n">02 · Which places</span>Black rivers, white springs, red rocks</h2>
+<p>The colour depends on what is being named. Weighting every language equally, so that one huge list cannot swamp the rest, {{words.river_black_eq|f1}}% of river and stream names are black, the highest share of any kind of place, and rivers are blacker than the language's own average in {{rivers_blacker.blacker|int}} of {{rivers_blacker.langs|int}} languages. Dark water is the oldest colour name there is: peat, deep pools, shade. Springs and wells are the whitest kind of place ({{words.spring_white_eq|f1}}% white), for the chalk and limestone they rise from and the clear water. Red belongs to rock and bare ground: cliffs, crags and plains carry the most red names.</p>
+<p>Mountains are less tidy than the old saying that mountains are white. White leads, at {{words.mountain_white_eq|f1}}% against {{words.mountain_black_eq|f1}}% black and {{words.mountain_red_eq|f1}}% red, but mountains are whiter than their language's average in only {{mountains_whiter.whiter|int}} of {{mountains_whiter.langs|int}} languages: snow peaks are white, but forested hills are black and bare ones red.</p>
+<div class="figure"><img src="img/kinds.png" alt="Stacked bars of the share of each colour among names of rivers, lakes, springs, seas, mountains, rocks, valleys, plains and settlements" loading="lazy"><p class="src">Colour of the name by kind of place, every language with at least 30 names of that kind weighted equally.</p></div>
+
+<h2><span class="n">03 · The great families</span>Kara and Ak, Río Negro and Río Blanco</h2>
+<p>Each language has its favourite. In the Turkic world, from Anatolia to the Altai, kara (black) and ak (white) make up {{families.tr_kara_ak_pct|f1}}% of all colour names: Karasu ({{families.karasu|int}} times), Aksu, Karakol, Kara Dağ, Ak Tepe. In Persian and Dari, siāh (black) alone is {{families.fa_siah_pct|f1}}%, mostly mountains: Kūh-e Sīāh, the Black Mountain, appears {{families.kuh_siah|int}} times. Nordic maps are covered in svart: {{families.nord_svart_pct|f1}}% of their colour names, Svartberget and Svarttjønn on every fell, though Norway's white, kvit, is common too (Kvitfjellet, Kvitholmen).</p>
+<p>The Spanish-speaking world is the whitest. Its hills are Cerro Colorado ({{families.cerro_colorado|int}} times), Cerro Blanco ({{families.cerro_blanco|int}}) and Cerro Negro ({{families.cerro_negro|int}}), and unlike most of the world its rivers are whiter than black: {{families.iberian_river_white_pct|f1}}% of Spanish and Portuguese river names are white and {{families.iberian_river_black_pct|f1}}% black, {{families.rio_blanco|int}} Río Blanco against {{families.rio_negro|int}} Río Negro. In China, bai (white, 白) and huang (yellow, 黄) make up {{families.zh_white_yellow_pct|f1}}% of colour names, yellow for the loess and the Yellow River country, white for sand, stone and water.</p>
+<div class="figure"><img src="img/families.png" alt="Three regional maps: the Turkic world with black and white dots, Latin America with white, red and black dots, and China with white and yellow dots" loading="lazy"><p class="src">Three colour families: the Turkic and Persian lands, Latin America and China.</p></div>
+
+<h2><span class="n">04 · Countries</span>The most common colour in each country</h2>
+<p>In the {{countries.with30|int}} countries with at least 30 colour names, the most common colour is white in {{countries.top_count.white|int}}, black in {{countries.top_count.black|int}}, red in {{countries.top_count.red|int}}, green in {{countries.top_count.green|int}}, yellow in {{countries.top_count.yellow|int}} and blue-green in {{countries.top_count.grue|int}} (South Korea); blue leads nowhere. Black leads across the English-speaking world, Scandinavia, Turkey, Central Asia, Iran and Afghanistan; white across Latin America, Mongolia, Serbia, North Macedonia, South Africa and Poland; red in the Arab world and in Russia. Switch on the country shading in the layers panel to see the map, or the black against white ratio.</p>
+<div class="figure"><img src="img/countries.png" alt="World map with each country shaded in its most common colour name" loading="lazy"><p class="src">Most common colour among each country's colour names (countries with at least 30).</p></div>
+
+<h2><span class="n">05 · Red</span>Red earth, and red flags</h2>
+<p>Not all red is the colour of the ground. In Russia, Ukraine and Belarus {{political.eslav_pct|f1}}% of red names are revolutionary: Krasnyy Oktyabr' (Red October), Krasnaya Zarya (Red Dawn), Krasnoarmeysk. In China {{political.zh_pct|f1}}% are, above all Hongqi (Red Flag) and Hongxing (Red Star) villages. Without them red would fall from {{political.eslav_red_pct|f1}}% to {{political.eslav_red_pct_without|f1}}% of East Slavic colour names. (Krasnyy also once meant beautiful, so Krasnaya Polyana may be a fair glade rather than a red one.)</p>
+<p>And red earth is rarer than you might think. Of {{earth.n|int}} names about earth, soil, sand or clay, from Tierra Colorada to 黄土, only {{earth.red_pct|f1}}% are red, about the same as names overall: white earth (Tierra Blanca, {{families.tierra_blanca|int}} times) and yellow earth are just as common. Tick "only names of earth" in the layers panel to see them.</p>
+
+<h2><span class="n">06 · How I made this</span>Finding colours, not false friends</h2>
+<p><b>Data.</b> GeoNames (CC BY 4.0) lists about 13 million places. Two broad searches on colour words kept {{source.candidates|int}} candidate rows: whole words in English and the Romance languages, the start of words in German, Dutch, the Nordic languages, Polish and Russian, and the colour characters in Chinese and Japanese names; then a second, wider pass for English and Turkic compounds (Blackburn, Whitby, Aksu, Karakol), Norwegian kvit, Mongolian, Hindi and Urdu, and Korean.</p>
+<p><b>The classifier.</b> Most candidates are false friends: Rotterdam is not red, Belgrade's Bel is but Belov's is a surname, a Chinese Huang village is usually a family name, and Negro Creek in the United States is named for people, not a colour. So each language has its own rules: the colour word must be in a form that language uses (an adjective, or the first part of a compound whose second part is a landscape word, as in Schwarz-wald or Svart-berget), in a country where the language is spoken, and outside a stop-list of saints, surnames, plants and animals, brands and states. Chinese and Japanese are read only in their own characters. {{source.rejected|int}} candidates were turned down.</p>
+<p><b>Checking.</b> I read samples of up to 50 accepted names for every colour in every language, {{precision.sampled|int}} names in all, and tuned the rules on what I found. After tuning, {{precision.correct|int}} of the {{precision.sampled|int}} were right ({{precision.overall_pct|int}}%); because the same samples guided the rules, the true precision is a little lower. For the second pass I read 50 names for each new rule: {{precision_supp.correct|int}} of {{precision_supp.sampled|int}} were right. The review is in the data.</p>
+<p><b>What it cannot say.</b> GeoNames is fullest for the United States, Mexico, China, Norway and Iran, so counts follow the gazetteer, not the land. Some languages are only partly in: Korean names count only where the characters or a clear compound settle the meaning, and Hindi and Urdu only where the colour stands beside a landscape word (Kala Pani, Lal Tibba), which leaves mostly kala, black, so India and Pakistan look blacker than they are. Others are missing altogether (Hungarian, Finnish, Greek, Malay, Pashto, Afrikaans rooi and swart, and the languages of Africa). A colour word is not always about colour: Black can be a family name, krasnyy can mean beautiful, and qing and ao (青) cover both blue and green. Every caveat is in the paper.</p>
+
+<details><summary>The colour words, language by language</summary>
+<div class="tw"><table class="words" id="wordsTable"></table></div>
+</details>
+
+<details><summary>Sources and licences</summary>
+<ul class="plain">
+<li>GeoNames (geonames.org), allCountries dump, CC BY 4.0. Names, coordinates and feature codes.</li>
+<li>Map: OpenStreetMap contributors (ODbL), vector tiles by OpenFreeMap (OpenMapTiles schema); the Inked World map style and its data (Natural Earth, RESOLVE Ecoregions 2017 CC BY 4.0, Wikidata CC0), from the ink-map study; elevation from AWS Terrain Tiles.</li>
+<li>Country outlines: Natural Earth 1:50m (public domain).</li>
+<li>Fonts: MedievalSharp and the IM Fell types (SIL Open Font License). MapLibre GL JS 4.7.1 (BSD 3-Clause).</li>
+</ul></details>
+
+<div class="cta"><a class="p" href="https://doi.org/10.5281/zenodo.24043682">Read the paper</a><a href="{{REPO}}">Data and code</a><a href="https://blog.tristanhotham.com/2026/10/31/colour-names/">Blog post</a></div>
+
+<footer>
+<p>Dr Tristan Hotham, Independent researcher. ORCID <a href="https://orcid.org/0000-0003-4931-9349">0000-0003-4931-9349</a>.</p>
+<p>Cite as: Hotham, T. (2026) The colours of the world's place names. Zenodo. <a href="https://doi.org/10.5281/zenodo.24043682">https://doi.org/10.5281/zenodo.24043682</a></p>
+<p>Code: <a href="{{REPO}}">github.com/Tristan-Hotham/colour-names</a> (MIT). Text, figures and derived data CC BY 4.0; place names from GeoNames (CC BY 4.0); map data © OpenStreetMap contributors (ODbL).</p>
+<p>{{AI}}</p>
+</footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="js/curated.js?v=1"></script>
+<script src="js/ink-palette.js?v=1"></script>
+<script src="js/ink-icons.js?v=1"></script>
+<script src="js/ink-houses.js?v=1"></script>
+<script src="js/ink-map.js?v=1"></script>
+<script src="js/ink-extras.js?v=1"></script>
+<script>
+(function () {
+  const qs = new URLSearchParams(location.search);
+  const opts = { workerConfig: { heritage: '', hills: '', places: '' } };
+  if (qs.get('tj')) opts.tilejson = qs.get('tj');
+  if (qs.get('dem')) opts.dem = qs.get('dem');
+  const start = qs.get('at') ? qs.get('at').split(',').map(Number) : null;
+  opts.mapOptions = start ? { center: [start[1], start[0]], zoom: start[2] } : { center: [20, 28], zoom: matchMedia('(max-width:600px)').matches ? 0.7 : 1.55 };
+  const $ = id => document.getElementById(id);
+  let D = null, map = null, PTS = null;
+  const state = { off: new Set(), lang: '', kind: '', earth: false, pol: false };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // cartouche: folded on phones from the start, after the first touch of the map elsewhere
+  const ct = $('cartouche');
+  const fold = f => { ct.classList.toggle('folded', f); $('ctToggle').setAttribute('aria-expanded', String(!f)); };
+  if (matchMedia('(max-width:600px)').matches) fold(true);
+  $('ctToggle').addEventListener('click', () => fold(!ct.classList.contains('folded')));
+  $('ctFold').addEventListener('click', () => fold(true));
+  document.addEventListener('fullscreenchange', () => { if (document.fullscreenElement) fold(true); });
+
+  const dataP = fetch('data/points.json').then(r => r.json());
+  InkMap.create('map', opts).then(m => {
+    map = window.__map = m; window.__popup = (i, ll) => popup(i, ll);
+    $('nojs').remove();
+    const foldAttr = () => { const at = document.querySelector('.maplibregl-ctrl-attrib.maplibregl-compact'); if (at) { at.classList.remove('maplibregl-compact-show'); at.removeAttribute('open'); } };
+    map.once('idle', foldAttr); foldAttr();
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+    if (InkMap.setWinter) InkMap.setWinter(map, false);       // no snow: white dots must stay visible
+    ['heritage', 'flight', 'animals', 'farms', 'towns'].forEach(g => InkMap.setGroup(map, g, false));
+    const isDark = () => { const r = document.documentElement; return r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
+    const tone = () => InkMap.setSeaTone && InkMap.setSeaTone(map, isDark());
+    tone(); new MutationObserver(tone).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    addCountries();
+    dataP.then(d => { D = d; addPoints(); buildUI(); }).catch(e => console.error('points', e));
+    setupLayers();
+  }).catch(e => { console.error(e); const n = $('nojs'); if (n) n.textContent = 'The map could not load: ' + e.message; });
+
+  function addCountries() {
+    map.addSource('cn', { type: 'geojson', data: 'data/countries.json', attribution: 'Countries: Natural Earth' });
+    const T = { black: '#2B2119', white: '#FFFDF6', red: '#B0301F', green: '#55803A', blue: '#3C6C9C', yellow: '#D9A21E', grue: '#3F8C84' };
+    map.addLayer({ id: 'cn-top', type: 'fill', source: 'cn', layout: { visibility: 'none' }, filter: ['!=', ['coalesce', ['get', 'top'], ''], ''],
+      paint: { 'fill-color': ['match', ['get', 'top'], 'black', T.black, 'white', T.white, 'red', T.red, 'green', T.green, 'blue', T.blue, 'yellow', T.yellow, '#ccc'],
+               'fill-opacity': ['match', ['get', 'top'], 'black', 0.42, 'white', 0.75, 0.5] } }, firstSymbol());
+    map.addLayer({ id: 'cn-bw', type: 'fill', source: 'cn', layout: { visibility: 'none' }, filter: ['!=', ['coalesce', ['get', 'bw'], -1], -1],
+      paint: { 'fill-color': ['interpolate', ['linear'], ['ln', ['get', 'bw']], -2.3, '#FFFDF6', -0.7, '#E9DDBF', 0, '#B8A887', 0.7, '#7A6A55', 2.3, '#2B2119'], 'fill-opacity': 0.7 } }, firstSymbol());
+    map.addLayer({ id: 'cn-line', type: 'line', source: 'cn', layout: { visibility: 'none' }, paint: { 'line-color': '#2B2119', 'line-width': 0.6, 'line-opacity': 0.6 } }, firstSymbol());
+  }
+  // our layers go above the drawn land, glyphs and woods, below the hand lettering of places
+  function firstSymbol() { const ls = map.getStyle().layers; const l = ls.find(x => x.metadata && x.metadata.group === 'names'); return l ? l.id : undefined; }
+
+  function addPoints() {
+    const C = D.colours, feats = new Array(D.p.length);
+    for (let i = 0; i < D.p.length; i++) { const r = D.p[i]; feats[i] = { type: 'Feature', id: i, geometry: { type: 'Point', coordinates: [r[0] / 1e4, r[1] / 1e4] }, properties: { c: r[2], l: r[3], f: r[4], e: r[10], p: r[8], n: r[6] } }; }
+    map.addSource('pts', { type: 'geojson', data: { type: 'FeatureCollection', features: feats }, attribution: 'Place names: <a href="https://www.geonames.org/" target="_blank">GeoNames</a> (CC BY 4.0)' });
+    const col = ['match', ['get', 'c']]; const edge = ['match', ['get', 'c']];
+    C.forEach((c, i) => { col.push(i, D.tint[c]); edge.push(i, D.edge[c]); }); col.push('#999'); edge.push('#555');
+    map.addLayer({ id: 'pts', type: 'circle', source: 'pts', paint: {
+      'circle-color': col, 'circle-stroke-color': edge,
+      'circle-radius': ['interpolate', ['linear'], ['zoom'], 0, 1.3, 3, 2, 6, 3.6, 10, 6, 14, 8],
+      'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 0, 0.35, 5, 0.7, 10, 1.3],
+      'circle-opacity': ['interpolate', ['linear'], ['zoom'], 0, 0.8, 6, 0.92], 'circle-stroke-opacity': 0.9 } }, firstSymbol());
+    const lab = ['match', ['get', 'c']]; C.forEach((c, i) => lab.push(i, c === 'white' ? '#6B5A44' : c === 'yellow' ? '#8A6410' : D.edge[c])); lab.push('#2B2119');
+    map.addLayer({ id: 'pts-names', type: 'symbol', source: 'pts', minzoom: 9, layout: { 'text-field': ['get', 'n'], 'text-font': ['Ink Italic'], 'text-size': ['interpolate', ['linear'], ['zoom'], 9, 11, 14, 14],
+      'text-variable-anchor': ['left', 'right', 'top', 'bottom'], 'text-radial-offset': 0.7, 'text-max-width': 9, 'text-padding': 3 },
+      paint: { 'text-color': lab, 'text-halo-color': 'rgba(246,238,216,0.92)', 'text-halo-width': 1.4 } });
+    map.on('click', 'pts', e => { const f = e.features[0]; popup(f.id, e.lngLat); });
+    map.on('mouseenter', 'pts', () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', 'pts', () => map.getCanvas().style.cursor = '');
+    map.on('click', e => {
+      if (map.queryRenderedFeatures(e.point, { layers: ['pts'] }).length) return;
+      const lay = ['cn-top', 'cn-bw'].filter(l => map.getLayoutProperty(l, 'visibility') === 'visible');
+      if (!lay.length) return;
+      const f = map.queryRenderedFeatures(e.point, { layers: lay })[0]; if (f) countryPopup(f.properties, e.lngLat);
+    });
+    applyFilter();
+  }
+  function meaning(c) { return { black: 'black', white: 'white', red: 'red', green: 'green', blue: 'blue', yellow: 'yellow', grue: 'blue-green (one word for both)' }[c]; }
+  function popup(i, ll) {
+    const r = D.p[i], c = D.colours[r[2]], l = D.langs[r[3]];
+    const html = '<b class="t">' + esc(r[6]) + '</b>' +
+      '<div><span class="sw" style="background:' + D.tint[c] + ';border-color:' + D.edge[c] + '"></span>' + meaning(c) + ' <span class="m">(from ' + esc(r[7]) + ')</span></div>' +
+      '<div class="m">' + esc(D.lang_name[l]) + ' · ' + esc(D.ftype_name[D.ftypes[r[4]]]) + ' · ' + esc(D.country[r[5]]) + '</div>' +
+      (r[8] ? '<div class="m">Revolutionary red: named in the Soviet or Communist era</div>' : '') +
+      (r[10] ? '<div class="m">A name about earth, soil or clay</div>' : '') +
+      '<div style="margin-top:5px"><a href="https://www.geonames.org/' + r[9] + '" target="_blank" rel="noopener">GeoNames ' + r[9] + '</a></div>';
+    new maplibregl.Popup({ maxWidth: '290px' }).setLngLat(ll || [r[0] / 1e4, r[1] / 1e4]).setHTML(html).addTo(map);
+  }
+  function countryPopup(p, ll) {
+    const C = D ? D.colours : []; let tot = 0; C.forEach(c => tot += (+p[c] || 0));
+    let bar = '<div class="cb">'; C.forEach(c => { const v = +p[c] || 0; if (v) bar += '<span style="flex:' + v + ';background:' + D.tint[c] + '"></span>'; }); bar += '</div>';
+    const rows = C.filter(c => +p[c]).sort((a, b) => p[b] - p[a]).map(c => meaning(c) + ' ' + Math.round(100 * p[c] / tot) + '%').join(', ');
+    new maplibregl.Popup({ maxWidth: '290px' }).setLngLat(ll).setHTML('<b class="t">' + esc(p.name) + '</b><div>' + (+p.n).toLocaleString('en-GB') + ' colour names</div>' + bar + '<div class="m">' + rows + '</div>' + (p.bw ? '<div class="m">Black to white: ' + (+p.bw).toFixed(2) + '</div>' : '')).addTo(map);
+  }
+  function applyFilter() {
+    if (!map || !map.getLayer('pts')) return;
+    const f = ['all'];
+    if (state.off.size) f.push(['!', ['in', ['get', 'c'], ['literal', [...state.off]]]]);
+    if (state.lang !== '') f.push(['==', ['get', 'l'], +state.lang]);
+    if (state.kind !== '') f.push(['==', ['get', 'f'], +state.kind]);
+    if (state.earth) f.push(['==', ['get', 'e'], 1]);
+    if (state.pol) f.push(['==', ['get', 'p'], 1]);
+    map.setFilter('pts', f.length > 1 ? f : null); map.setFilter('pts-names', f.length > 1 ? f : null);
+    let n = 0; for (const r of D.p) if (!state.off.has(r[2]) && (state.lang === '' || r[3] === +state.lang) && (state.kind === '' || r[4] === +state.kind) && (!state.earth || r[10]) && (!state.pol || r[8])) n++;
+    $('count').textContent = n.toLocaleString('en-GB') + ' names shown';
+  }
+  function buildUI() {
+    const chips = $('chips');
+    D.colours.forEach((c, i) => {
+      const b = document.createElement('button'); b.className = 'chip'; b.setAttribute('aria-pressed', 'true');
+      b.innerHTML = '<i style="background:' + D.tint[c] + ';border-color:' + D.edge[c] + '"></i>' + (c === 'grue' ? 'Blue-green' : D.cname[c]);
+      b.title = 'Show or hide ' + D.cname[c].toLowerCase() + ' names';
+      b.addEventListener('click', () => { if (state.off.has(i)) state.off.delete(i); else state.off.add(i); b.classList.toggle('off', state.off.has(i)); b.setAttribute('aria-pressed', String(!state.off.has(i))); applyFilter(); });
+      chips.appendChild(b);
+    });
+    const ls = $('langSel'); D.langs.forEach((l, i) => { const o = document.createElement('option'); o.value = i; o.textContent = D.lang_name[l]; ls.appendChild(o); });
+    const ks = $('kindSel'); D.ftypes.forEach((k, i) => { const o = document.createElement('option'); o.value = i; o.textContent = D.ftype_name[k]; ks.appendChild(o); });
+    ls.addEventListener('change', () => { state.lang = ls.value; applyFilter(); });
+    ks.addEventListener('change', () => { state.kind = ks.value; applyFilter(); });
+    $('earthBox').addEventListener('change', e => { state.earth = e.target.checked; applyFilter(); });
+    $('polBox').addEventListener('change', e => { state.pol = e.target.checked; applyFilter(); });
+    $('ptsBox').addEventListener('change', e => ['pts', 'pts-names'].forEach(l => map.setLayoutProperty(l, 'visibility', e.target.checked ? 'visible' : 'none')));
+    // words table
+    const t = $('wordsTable'); let h = '<tr><th>Language</th>' + D.colours.map(c => '<th><span class="sw" style="background:' + D.tint[c] + ';border-color:' + D.edge[c] + '"></span>' + (c === 'grue' ? 'Blue-green' : D.cname[c]) + '</th>').join('') + '</tr>';
+    D.langs.forEach(l => { h += '<tr><td>' + esc(D.lang_name[l]) + '</td>' + D.colours.map(c => '<td>' + esc((D.words[l] || {})[c] || '') + '</td>').join('') + '</tr>'; });
+    t.innerHTML = h;
+    setupSearch();
+  }
+  function setupLayers() {
+    const lp = $('lp'), btn = $('lyrBtn');
+    btn.addEventListener('click', e => { e.stopPropagation(); const o = lp.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+    document.addEventListener('click', e => { if (!lp.contains(e.target) && e.target !== btn) { lp.classList.remove('open'); btn.setAttribute('aria-expanded', false); } });
+    const boxes = [...lp.querySelectorAll('input[data-g]')], modern = $('modern');
+    const NAME_LAYERS = map.getStyle().layers.filter(l => l.type === 'symbol' && l.metadata && ['names', 'rivers'].includes(l.metadata.group)).map(l => l.id);
+    const saved = {}; NAME_LAYERS.forEach(id => saved[id] = { c: map.getPaintProperty(id, 'text-color'), h: map.getPaintProperty(id, 'text-halo-color') });
+    function apply() {
+      const m = modern.checked;
+      boxes.forEach(b => { const g = b.dataset.g; const inkOnly = ['mountains', 'forests', 'biomes', 'sea', 'tint'].includes(g); InkMap.setGroup(map, g, b.checked && !(m && inkOnly)); });
+      InkMap.setGroup(map, 'paper', !m); InkMap.setGroup(map, 'modern', m); InkMap.setGroup(map, 'coast', !m);
+      NAME_LAYERS.forEach(id => { map.setPaintProperty(id, 'text-color', m ? '#333333' : saved[id].c); map.setPaintProperty(id, 'text-halo-color', m ? 'rgba(255,255,255,0.9)' : saved[id].h); });
+    }
+    boxes.forEach(b => b.addEventListener('change', apply)); modern.addEventListener('change', apply);
+    lp.querySelectorAll('input[name=cn]').forEach(r => r.addEventListener('change', () => {
+      const v = lp.querySelector('input[name=cn]:checked').value;
+      map.setLayoutProperty('cn-top', 'visibility', v === 'top' ? 'visible' : 'none');
+      map.setLayoutProperty('cn-bw', 'visibility', v === 'bw' ? 'visible' : 'none');
+      map.setLayoutProperty('cn-line', 'visibility', v ? 'visible' : 'none');
+      const lg = $('lgd');
+      if (v === 'top' && D) { lg.innerHTML = '<b>Most common colour</b><br>' + ['black', 'white', 'red', 'green', 'yellow'].map(c => '<span class="sw" style="background:' + D.tint[c] + ';border-color:' + D.edge[c] + '"></span>' + D.cname[c]).join(' ') + '<br><span style="color:#6E604E">Countries with 30 or more names. Tap a country.</span>'; }
+      else if (v === 'bw') { lg.innerHTML = '<b>Black against white names</b><div class="bar"><span style="background:#FFFDF6"></span><span style="background:#E9DDBF"></span><span style="background:#B8A887"></span><span style="background:#7A6A55"></span><span style="background:#2B2119"></span></div><div class="ends"><span>10 white : 1 black</span><span>1 : 10</span></div>'; }
+      lg.classList.toggle('on', !!v);
+    }));
+  }
+  function setupSearch() {
+    const q = $('q'), sug = $('sug');
+    const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    let idx = null, sel = -1, items = [];
+    const build = () => { idx = D.p.map((r, i) => [norm(r[6]), i]); };
+    function show(list) {
+      items = list; sel = -1;
+      sug.innerHTML = list.map((it, k) => '<li role="option" data-k="' + k + '">' + esc(it.t) + ' <span>' + esc(it.s) + '</span></li>').join('');
+      sug.style.display = list.length ? 'block' : 'none';
+    }
+    function go(it) {
+      sug.style.display = 'none'; q.value = it.t;
+      if (it.i !== undefined) { const r = D.p[it.i]; map.flyTo({ center: [r[0] / 1e4, r[1] / 1e4], zoom: Math.max(map.getZoom(), 10), duration: 1800 }); map.once('moveend', () => popup(it.i)); }
+      else if (it.b) map.fitBounds(it.b, { padding: 30, duration: 1800 });
+    }
+    q.addEventListener('input', () => {
+      const v = norm(q.value.trim()); if (v.length < 2) { show([]); return; }
+      if (!idx) build();
+      const out = [];
+      const cf = map.querySourceFeatures('cn');
+      const seenC = new Set();
+      for (const f of cf) { const p = f.properties; if (!seenC.has(p.cc) && norm(p.name).startsWith(v)) { seenC.add(p.cc); const bb = new maplibregl.LngLatBounds(); (function walk(c) { if (typeof c[0] === 'number') bb.extend(c); else c.forEach(walk); })(f.geometry.coordinates); out.push({ t: p.name, s: 'country', b: bb }); } if (out.length > 2) break; }
+      for (const [n, i] of idx) { if (n.startsWith(v) || (v.length > 3 && n.includes(v))) { const r = D.p[i]; out.push({ t: r[6], s: D.cname[D.colours[r[2]]].toLowerCase() + ' · ' + D.country[r[5]], i }); if (out.length >= 12) break; } }
+      show(out);
+    });
+    q.addEventListener('keydown', e => {
+      const lis = [...sug.children];
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); sel = Math.max(0, Math.min(lis.length - 1, sel + (e.key === 'ArrowDown' ? 1 : -1))); lis.forEach((l, k) => l.setAttribute('aria-selected', k === sel)); }
+      else if (e.key === 'Enter' && items.length) { e.preventDefault(); go(items[Math.max(sel, 0)]); }
+      else if (e.key === 'Escape') sug.style.display = 'none';
+    });
+    sug.addEventListener('click', e => { const li = e.target.closest('li'); if (li) go(items[+li.dataset.k]); });
+  }
+  $('theme').addEventListener('click', () => { const r = document.documentElement; const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = dark ? 'light' : 'dark'; });
+})();
+</script>
+{{FULLSCREEN}}
+</body>
+</html>
