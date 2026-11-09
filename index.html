@@ -186,7 +186,7 @@ table.words th{font-weight:500;color:var(--muted)}
       <label><input type="checkbox" data-g="roads" checked> Roads and tracks</label>
       <label><input type="checkbox" data-g="tint" checked> Watercolour tints</label>
       <label><input type="checkbox" data-g="hillshade"> Hill shading</label>
-      <label><input type="checkbox" id="modern"> Plain modern map, for finding your way</label>
+      <label><input type="checkbox" id="modern" checked> Plain modern map, for finding your way</label>
     </div>
     <div class="lgd" id="lgd" aria-live="polite"></div>
     <div class="ov-br" id="count" aria-live="polite"></div>
@@ -403,7 +403,7 @@ table.words th{font-weight:500;color:var(--muted)}
       InkMap.setGroup(map, 'paper', !m); InkMap.setGroup(map, 'modern', m); InkMap.setGroup(map, 'coast', !m);
       NAME_LAYERS.forEach(id => { map.setPaintProperty(id, 'text-color', m ? '#333333' : saved[id].c); map.setPaintProperty(id, 'text-halo-color', m ? 'rgba(255,255,255,0.9)' : saved[id].h); });
     }
-    boxes.forEach(b => b.addEventListener('change', apply)); modern.addEventListener('change', apply);
+    boxes.forEach(b => b.addEventListener('change', apply)); modern.addEventListener('change', apply); apply();
     lp.querySelectorAll('input[name=cn]').forEach(r => r.addEventListener('change', () => {
       const v = lp.querySelector('input[name=cn]:checked').value;
       map.setLayoutProperty('cn-top', 'visibility', v === 'top' ? 'visible' : 'none');
